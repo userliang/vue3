@@ -4,7 +4,7 @@
 
 ## 在线预览
 
-https://userliang.github.io/vite-vue3-template/#/
+https://userliang.github.io/vue3/#/
 
 ## 技术栈
 
@@ -29,7 +29,7 @@ https://userliang.github.io/vite-vue3-template/#/
 #### 使用 Git
 
 ```sh
-git clone https://github.com/userliang/vite-vue3-template.git
+git clone https://github.com/userliang/vue3.git
 ```
 
 ### 安装依赖
