@@ -1,10 +1,9 @@
 <template>
   <div class="header">
-    <div>
-      <el-button @click="handleCollapse" type="text">{{
-        collapse ? 'expand' : 'collapse'
-      }}</el-button>
-    </div>
+    <span class="collapseIcon" @click="handleCollapse">
+      <i v-if="collapse" class="ri-menu-unfold-line"></i>
+      <i v-else class="ri-menu-fold-line"></i>
+    </span>
     <div class="title" @click="router.push('/home')">
       Vite2.x + Vue3.x + TypeScript Starter
     </div>
@@ -54,13 +53,9 @@ export default defineComponent({
     cursor: pointer;
   }
 
-  .go-github {
+  .collapseIcon {
     cursor: pointer;
     font-size: 16px;
-
-    .icon {
-      font-size: 20px;
-    }
   }
 }
 </style>

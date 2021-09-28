@@ -33,6 +33,7 @@
     "axios": "^0.21.1",
     "element-plus": "^1.1.0-beta.7",
     "qs": "^6.10.1",
+    "remixicon": "^2.5.0",
     "vue": "^3.2.6",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"
