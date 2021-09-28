@@ -39,7 +39,7 @@ export default defineComponent({
 
     const reactiveData = reactive({
       active: '',
-      collapse: computed(() => store.state.commonModule.collapse)
+      collapse: computed(() => store?.state.commonModule.collapse)
     })
     const route = useRoute()
     watch(
