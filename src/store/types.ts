@@ -1,4 +1,5 @@
 import NumFactoryStateTypes from './modules/NumFactory/types'
+import { commonStateTypes } from './modules/common'
 
 export default interface RootStateTypes {
   text: string
@@ -6,4 +7,5 @@ export default interface RootStateTypes {
 
 export interface AllStateTypes extends RootStateTypes {
   numFactoryModule: NumFactoryStateTypes
+  commonModule: commonStateTypes
 }

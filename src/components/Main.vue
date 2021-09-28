@@ -1,18 +1,14 @@
 <template>
   <main class="main-container">
-    <div class="top">
-      <Header />
+    <div class="left">
+      <Nav />
     </div>
-
-    <div class="bottom">
-      <div class="left">
-        <Nav />
+    <div class="right">
+      <div class="top">
+        <Header />
       </div>
-
-      <div class="right">
-        <div class="content">
-          <router-view />
-        </div>
+      <div class="content">
+        <router-view />
       </div>
     </div>
   </main>
@@ -35,69 +31,30 @@ export default defineComponent({
 <style scoped lang="scss">
 @import '../style/basic.scss';
 $top-height: 60px;
-$left-side-width: 80px;
 
 .main-container {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
   background: $second-background-color;
-  box-sizing: border-box;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  .top {
-    position: relative;
-    box-sizing: border-box;
-    width: 100%;
-    height: $top-height;
-    margin-bottom: 10px;
+  .left {
+    overflow-y: auto;
+    flex: 0 0 auto;
+    margin-right: 10px;
   }
-
-  .bottom {
-    position: relative;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
+  .right {
+    flex: 1 1 auto;
     display: flex;
-    justify-content: space-between;
-
-    .left {
-      position: relative;
-      width: $left-side-width;
-      height: 100%;
-      box-sizing: border-box;
-    }
-
-    .right {
-      position: relative;
+    flex-direction: column;
+    .top {
       width: 100%;
-      height: 100%;
-      box-sizing: border-box;
-      padding: 0 10px 10px 10px;
-
-      .content {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background: $background-color;
-        border-radius: 5px;
-        box-sizing: border-box;
-        padding: 10px;
-      }
+      margin-bottom: 10px;
+      flex: 0 0 $top-height;
     }
-  }
-}
-
-.page-links {
-  a {
-    font-weight: bold;
-    margin: 0 20px;
+    .content {
+      flex: auto;
+      overflow: auto;
+      background-color: #fff;
+    }
   }
 }
 </style>

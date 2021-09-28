@@ -1,22 +1,37 @@
 <template>
   <div class="header">
-    <div class="title" @click="router.push('/')">
+    <div>
+      <el-button @click="handleCollapse" type="text">{{
+        collapse ? 'expand' : 'collapse'
+      }}</el-button>
+    </div>
+    <div class="title" @click="router.push('/home')">
       Vite2.x + Vue3.x + TypeScript Starter
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed, reactive, toRefs } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from '@/store/index'
 
 export default defineComponent({
   name: 'Header',
   setup() {
-    const goGitHub = () => {
-      window.open('https://github.com/XPoet/vite-vue3-starter')
+    const store = useStore()
+    const router = useRouter()
+    const data = reactive({
+      collapse: computed(() => store.state.commonModule.collapse)
+    })
+    const handleCollapse = () => {
+      store.commit('commonModule/handleCollapse', !data.collapse)
     }
+
     return {
-      goGitHub
+      router,
+      handleCollapse,
+      ...toRefs(data)
     }
   }
 })

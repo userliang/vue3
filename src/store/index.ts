@@ -3,6 +3,7 @@ import { createStore, Store, useStore as baseUseStore } from 'vuex'
 import RootStateTypes, { AllStateTypes } from './types'
 
 import numFactoryModule from './modules/NumFactory'
+import commonModule from './modules/common'
 
 export const store = createStore<RootStateTypes>({
   state: {
@@ -12,7 +13,8 @@ export const store = createStore<RootStateTypes>({
   mutations: {},
   actions: {},
   modules: {
-    numFactoryModule
+    numFactoryModule,
+    commonModule
   }
 })
 

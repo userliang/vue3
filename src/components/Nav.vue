@@ -1,80 +1,54 @@
 <template>
-  <aside class="nav">
-    <ul class="nav-list">
-      <li
-        class="nav-item flex-center"
-        v-for="(nav, index) in navList"
-        :key="index"
-        :class="{ active: nav.isActive }"
-        @click="navClick(nav)"
-      >
-        {{ nav.name }}
-      </li>
-    </ul>
-  </aside>
+  <div class="nav">
+    <el-menu
+      class="el-menu-vertical-demo"
+      :collapse="collapse"
+      :router="true"
+      :default-active="active"
+    >
+      <el-menu-item index="/home">
+        <i class="el-icon-location"></i>
+        <template #title>Home</template>
+      </el-menu-item>
+      <el-menu-item index="/vuex">
+        <i class="el-icon-menu"></i>
+        <template #title>Vuex</template>
+      </el-menu-item>
+      <el-menu-item index="/axios">
+        <i class="el-icon-document"></i>
+        <template #title>Axios</template>
+      </el-menu-item>
+      <el-menu-item index="/test">
+        <i class="el-icon-setting"></i>
+        <template #title>Test</template>
+      </el-menu-item>
+    </el-menu>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import { NavItem } from '../common/types'
+import { defineComponent, reactive, toRefs, computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { useStore } from '@/store/index'
 
 export default defineComponent({
   name: 'Nav',
 
   setup() {
-    const router = useRouter()
+    const store = useStore()
 
     const reactiveData = reactive({
-      navList: [
-        {
-          name: 'Home',
-          isActive: false,
-          path: '/'
-        },
-        {
-          name: 'Vuex',
-          isActive: false,
-          path: '/vuex'
-        },
-        {
-          name: 'Axios',
-          isActive: false,
-          path: '/axios'
-        },
-        {
-          name: 'Test',
-          isActive: false,
-          path: '/test'
-        }
-      ],
-
-      navClick(e: NavItem) {
-        router.push(e.path)
-      }
+      active: '',
+      collapse: computed(() => store.state.commonModule.collapse)
     })
-
-    const changeNavActive = (currentPath: string) => {
-      reactiveData.navList.forEach((v: NavItem) => {
-        const temp = v
-        temp.isActive = temp.path === currentPath
-        return temp
-      })
-    }
-
+    const route = useRoute()
     watch(
-      () => router.currentRoute.value,
-      (_n) => {
-        changeNavActive(_n.path)
+      () => route.path,
+      (path) => {
+        console.log('监听到变化', path)
+        reactiveData.active = path
       }
     )
-
-    onMounted(() => {
-      router.isReady().then(() => {
-        changeNavActive(router.currentRoute.value.path)
-      })
-    })
-
     return {
       ...toRefs(reactiveData)
     }
@@ -91,17 +65,11 @@ export default defineComponent({
   box-sizing: border-box;
   background: #fff;
 
-  .nav-list {
-    .nav-item {
-      box-sizing: border-box;
-      width: 100%;
-      height: 60px;
-      cursor: pointer;
-
-      &.active {
-        font-weight: bold;
-        background: $second-background-color;
-      }
+  .el-menu-vertical-demo {
+    border: none;
+    &:not(.el-menu--collapse) {
+      width: 200px;
+      min-height: 400px;
     }
   }
 }
