@@ -7,6 +7,7 @@ import styleImport from '@/utils/style-import'
 import 'element-plus/dist/index.css'
 import '@/style/basic.scss'
 import 'remixicon/fonts/remixicon.css'
+import '../mock/user'
 
 const app = createApp(App)
 styleImport(app).use(ElementPlus).use(router).use(store, key).mount('#app')

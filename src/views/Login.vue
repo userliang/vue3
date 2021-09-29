@@ -25,8 +25,9 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from 'vue'
-// import { ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
+import axios from '../utils/axios'
 
 export default defineComponent({
   name: 'Login',
@@ -45,9 +46,26 @@ export default defineComponent({
       form.value.validate((valid: any) => {
         if (valid) {
           data.submitting = true
-          setTimeout(() => {
-            router.push('/home')
-          }, 1500)
+          axios({
+            method: 'post',
+            url: '/api/gw/v2/login/account',
+            data: {
+              username: 123,
+              password: 122
+            }
+          })
+            .then((res: any) => {
+              console.log('res', res)
+              if (res.success) {
+                router.push('/home')
+              } else {
+                ElMessage.error(res.errorMsg)
+              }
+              data.submitting = false
+            })
+            .catch(() => {
+              data.submitting = false
+            })
         }
       })
     }
