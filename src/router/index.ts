@@ -1,42 +1,52 @@
 import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router'
-import Home from '@/views/Home.vue'
-import Vuex from '@/views/Vuex.vue'
-import Test from '@/views/Test.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/login'
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: Home
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login.vue')
   },
   {
-    path: '/vuex',
-    name: 'Vuex',
-    component: Vuex
-  },
-  {
-    path: '/axios',
-    name: 'Axios',
-    component: () => import('@/views/Axios.vue') // 懒加载 Axios 组件
-  },
-  {
-    path: '/test',
-    name: 'Test',
-    component: Test
-  },
-  {
-    path: '/404',
-    name: '404',
-    component: () => import('@/views/404.vue')
-  },
-  {
-    path: '/403',
-    name: '403',
-    component: () => import('@/views/403.vue')
+    path: '/layout',
+    name: 'Layout',
+    component: () => import('@/layout/Layout.vue'),
+    redirect: '/home',
+    children: [
+      {
+        path: '/home',
+        name: 'Home',
+        component: () => import('@/views/Home.vue')
+      },
+      {
+        path: '/vuex',
+        name: 'Vuex',
+        component: () => import('@/views/Vuex.vue')
+      },
+      {
+        path: '/axios',
+        name: 'Axios',
+        component: () => import('@/views/Axios.vue')
+      },
+      {
+        path: '/test',
+        name: 'Test',
+        component: () => import('@/views/Test.vue')
+      },
+      {
+        path: '/404',
+        name: '404',
+        component: () => import('@/views/404.vue')
+      },
+      {
+        path: '/403',
+        name: '403',
+        component: () => import('@/views/403.vue')
+      }
+    ]
   }
 ]
 

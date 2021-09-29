@@ -29,7 +29,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useStore } from '../store'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'Nav',
@@ -45,9 +45,9 @@ export default defineComponent({
     watch(
       () => route.path,
       (path) => {
-        console.log('监听到变化', path)
         reactiveData.active = path
-      }
+      },
+      { immediate: true }
     )
     return {
       ...toRefs(reactiveData)
